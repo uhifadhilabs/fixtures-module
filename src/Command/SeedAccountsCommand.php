@@ -31,8 +31,9 @@ use Uhifadhi\Repository\UserRepository;
  * Seeds the demo accounts (Super Admin / Admin / Manager / two Staff) and their
  * positions with a single shared password from DEMO_PASSWORD, hashed here.
  * Idempotent and non-destructive: it never purges, so it is safe against a
- * database holding real data. Demo emails use the neutral uhifadhi.test domain;
- * provision real accounts with the host's app:user:create.
+ * database holding real data. Demo emails are built from the configured
+ * seeder.email_domain (uhifadhi.test by default); provision real accounts with
+ * the host's app:user:create.
  */
 #[AsCommand(
     name: 'seeder:accounts',
@@ -48,6 +49,7 @@ final class SeedAccountsCommand extends Command
         private readonly string $demoPassword,
         // The Super Admin can impersonate anyone, so it gets its own distinct password.
         private readonly string $superAdminPassword,
+        private readonly string $emailDomain,
     ) {
         parent::__construct();
     }
@@ -71,11 +73,11 @@ final class SeedAccountsCommand extends Command
         $analyst = $this->ensurePosition('Analyst', [PermissionEnum::AreaView, PermissionEnum::ModuleView, PermissionEnum::ModuleCreate]);
 
         $created = 0;
-        $created += $this->ensureUser('superadmin@uhifadhi.test', 'Sofia', 'Marwa', TeamRoleEnum::SuperAdmin, password: $this->superAdminPassword);
-        $created += $this->ensureUser('admin@uhifadhi.test', 'Amina', 'Hassan', TeamRoleEnum::Admin);
-        $created += $this->ensureUser('manager@uhifadhi.test', 'Joseph', 'Kimaro', TeamRoleEnum::Manager, $parkManager);
-        $created += $this->ensureUser('ranger@uhifadhi.test', 'Neema', 'Kileo', TeamRoleEnum::Staff, $ranger);
-        $created += $this->ensureUser('analyst@uhifadhi.test', 'Baraka', 'Mushi', TeamRoleEnum::Staff, $analyst);
+        $created += $this->ensureUser($this->email('superadmin'), 'Sofia', 'Marwa', TeamRoleEnum::SuperAdmin, password: $this->superAdminPassword);
+        $created += $this->ensureUser($this->email('admin'), 'Amina', 'Hassan', TeamRoleEnum::Admin);
+        $created += $this->ensureUser($this->email('manager'), 'Joseph', 'Kimaro', TeamRoleEnum::Manager, $parkManager);
+        $created += $this->ensureUser($this->email('ranger'), 'Neema', 'Kileo', TeamRoleEnum::Staff, $ranger);
+        $created += $this->ensureUser($this->email('analyst'), 'Baraka', 'Mushi', TeamRoleEnum::Staff, $analyst);
 
         $this->em->flush();
 
@@ -83,6 +85,11 @@ final class SeedAccountsCommand extends Command
         $io->note('Log in with any demo email and the DEMO_PASSWORD value.');
 
         return Command::SUCCESS;
+    }
+
+    private function email(string $localPart): string
+    {
+        return $localPart.'@'.$this->emailDomain;
     }
 
     /**

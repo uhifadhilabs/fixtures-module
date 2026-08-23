@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace UhifadhiLabs\Seeder;
 
+use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use UhifadhiLabs\Seeder\Command\SeedAccountsCommand;
 use UhifadhiLabs\Seeder\Command\SeedAllCommand;
 use UhifadhiLabs\Seeder\Command\SeedAreaCommand;
+use UhifadhiLabs\Seeder\DependencyInjection\SeederConfiguration;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
@@ -37,6 +39,11 @@ final class UhifadhiLabsSeederBundle extends AbstractBundle
 {
     protected string $extensionAlias = 'seeder';
 
+    public function configure(DefinitionConfigurator $definition): void
+    {
+        SeederConfiguration::define($definition->rootNode());
+    }
+
     /**
      * @param array<string, mixed> $config
      */
@@ -50,8 +57,9 @@ final class UhifadhiLabsSeederBundle extends AbstractBundle
                 service('Uhifadhi\Repository\UserRepository'),
                 service('Uhifadhi\Repository\PositionRepository'),
                 service('security.user_password_hasher'),
-                '%env(DEMO_PASSWORD)%',
-                '%env(DEMO_SUPER_ADMIN_PASSWORD)%',
+                $config['demo_password'],
+                $config['super_admin_password'],
+                $config['email_domain'],
             ])
             ->tag('console.command');
 

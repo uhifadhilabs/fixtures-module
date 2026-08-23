@@ -30,7 +30,7 @@ use UhifadhiLabs\Seeder\Command\SeedAccountsCommand;
  */
 final class SeedAccountsCommandTest extends TestCase
 {
-    private function command(UserRepository $users, ?EntityManagerInterface $em = null, string $demo = 'demo-pass', string $super = 'super-pass'): SeedAccountsCommand
+    private function command(UserRepository $users, ?EntityManagerInterface $em = null, string $demo = 'demo-pass', string $super = 'super-pass', string $domain = 'uhifadhi.test'): SeedAccountsCommand
     {
         $positions = $this->createStub(PositionRepository::class);
         $positions->method('findOneBy')->willReturn(null);
@@ -45,6 +45,7 @@ final class SeedAccountsCommandTest extends TestCase
             $hasher,
             $demo,
             $super,
+            $domain,
         );
     }
 
@@ -73,6 +74,30 @@ final class SeedAccountsCommandTest extends TestCase
 
         self::assertSame(Command::SUCCESS, $tester->execute([]));
         self::assertStringContainsString('0 account(s) created', $tester->getDisplay());
+    }
+
+    public function testTheDemoEmailsUseTheConfiguredDomain(): void
+    {
+        $asked = [];
+        $users = $this->createStub(UserRepository::class);
+        $users->method('findOneByEmail')->willReturnCallback(
+            static function (string $email) use (&$asked): ?User {
+                $asked[] = $email;
+
+                return null;
+            },
+        );
+
+        $tester = new CommandTester($this->command($users, domain: 'demo.example.org'));
+
+        self::assertSame(Command::SUCCESS, $tester->execute([]));
+        self::assertSame([
+            'superadmin@demo.example.org',
+            'admin@demo.example.org',
+            'manager@demo.example.org',
+            'ranger@demo.example.org',
+            'analyst@demo.example.org',
+        ], $asked);
     }
 
     public function testAPlaceholderPasswordIsRefused(): void
