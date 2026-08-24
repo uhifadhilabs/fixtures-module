@@ -35,7 +35,7 @@ final class SeedAllCommandTest extends TestCase
     /** @var array<string, mixed> */
     private array $areaInput = [];
 
-    private function application(bool $withCatalogue): Application
+    private function application(bool $withCatalogue, bool $withDepartments = true): Application
     {
         $application = new Application();
         $application->setAutoExit(false);
@@ -70,6 +70,11 @@ final class SeedAllCommandTest extends TestCase
                 $this->ran[] = 'app:seed:catalogue';
             }));
         }
+        if ($withDepartments) {
+            $application->addCommand($record('seeder:departments', function (): void {
+                $this->ran[] = 'seeder:departments';
+            }));
+        }
         $application->addCommand(new SeedAllCommand());
 
         return $application;
@@ -83,13 +88,14 @@ final class SeedAllCommandTest extends TestCase
         $exit = $tester->execute(['--area-uuid' => 'abc', '--area-file' => '/tmp/x.geojson']);
 
         self::assertSame(Command::SUCCESS, $exit);
-        self::assertSame(['seeder:accounts', 'seeder:area', 'app:seed:catalogue'], $this->ran);
+        // Departments run last: they attach modules by slug, so the catalogue must exist first.
+        self::assertSame(['seeder:accounts', 'seeder:area', 'app:seed:catalogue', 'seeder:departments'], $this->ran);
         self::assertSame(['uuid' => 'abc', 'file' => '/tmp/x.geojson'], $this->areaInput);
     }
 
     public function testTheCatalogueStepIsSkippedOutsideAHost(): void
     {
-        $application = $this->application(withCatalogue: false);
+        $application = $this->application(withCatalogue: false, withDepartments: false);
         $tester = new CommandTester($application->find('seeder:all'));
 
         self::assertSame(Command::SUCCESS, $tester->execute([]));

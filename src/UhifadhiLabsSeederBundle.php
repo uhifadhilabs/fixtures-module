@@ -20,6 +20,7 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use UhifadhiLabs\Seeder\Command\SeedAccountsCommand;
 use UhifadhiLabs\Seeder\Command\SeedAllCommand;
 use UhifadhiLabs\Seeder\Command\SeedAreaCommand;
+use UhifadhiLabs\Seeder\Command\SeedDepartmentsCommand;
 use UhifadhiLabs\Seeder\DependencyInjection\SeederConfiguration;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -60,6 +61,16 @@ final class UhifadhiLabsSeederBundle extends AbstractBundle
                 $config['demo_password'],
                 $config['super_admin_password'],
                 $config['email_domain'],
+            ])
+            ->tag('console.command');
+
+        $services->set('seeder.command.departments', SeedDepartmentsCommand::class)
+            ->args([
+                service('doctrine.orm.entity_manager'),
+                service('Uhifadhi\Repository\DepartmentRepository'),
+                service('Uhifadhi\Service\DepartmentService'),
+                service('Uhifadhi\Repository\ModuleRepository'),
+                service('Uhifadhi\Repository\PositionRepository'),
             ])
             ->tag('console.command');
 

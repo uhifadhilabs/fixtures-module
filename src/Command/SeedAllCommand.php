@@ -23,14 +23,15 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Rebuilds the demo baseline in one shot: accounts → area → the host's module
- * catalogue (which needs the area to backfill its modules). Without options the
+ * catalogue (which needs the area to backfill its modules) → departments (which
+ * need the catalogue, to attach modules by slug). Without options the
  * area step seeds the imaginary demo area; pass --area-uuid/--area-name/
  * --area-file to seed a real one. Each installed module seeds its own data with
  * its own <module>:seed:* commands — run those after this.
  */
 #[AsCommand(
     name: 'seeder:all',
-    description: 'Seed the baseline (accounts, area, catalogue). Modules seed themselves via <module>:seed:*.',
+    description: 'Seed the baseline (accounts, area, catalogue, departments). Modules seed themselves via <module>:seed:*.',
 )]
 final class SeedAllCommand extends Command
 {
@@ -66,6 +67,13 @@ final class SeedAllCommand extends Command
         // module runs outside a full uhifadhi host (e.g. its own test kernel).
         if ($application->has('app:seed:catalogue')) {
             $steps['app:seed:catalogue'] = [];
+        }
+        // Departments come LAST: they attach modules by slug, so the catalogue
+        // must already hold them — run before it and every attachment would be
+        // skipped as "not in the catalogue". Skipped the same way outside a host,
+        // where the department entity and services do not exist.
+        if ($application->has('seeder:departments')) {
+            $steps['seeder:departments'] = [];
         }
 
         foreach ($steps as $name => $options) {

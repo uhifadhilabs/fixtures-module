@@ -26,6 +26,8 @@ class Position
     /** @var list<PermissionEnum> */
     private array $permissions = [];
 
+    private ?Department $department = null;
+
     public function setName(string $name): static
     {
         $this->name = $name;
@@ -54,5 +56,17 @@ class Position
     public function getPermissions(): array
     {
         return $this->permissions;
+    }
+
+    public function getDepartment(): ?Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?Department $department): static
+    {
+        $this->department = $department;
+
+        return $this;
     }
 }
