@@ -100,7 +100,29 @@ final class SeedDepartmentsCommandTest extends TestCase
         return new Department()->setName($name);
     }
 
-    public function testItCreatesTheThreeDemoDepartmentsWhenNoneExist(): void
+    /**
+     * The full demo roster, in creation order — the design app's sample org
+     * (departments.widgets.js), which the seeded host must mirror.
+     *
+     * @return list<string>
+     */
+    private static function roster(): array
+    {
+        return ['Protection Service', 'Ecology', 'Community Development', 'Engineering', 'Human Resource', 'Planning', 'Tourism', 'ICT'];
+    }
+
+    /** @return array<string, Department> */
+    private function allExisting(): array
+    {
+        $existing = [];
+        foreach (self::roster() as $name) {
+            $existing[$name] = $this->department($name);
+        }
+
+        return $existing;
+    }
+
+    public function testItCreatesTheEightDemoDepartmentsWhenNoneExist(): void
     {
         $created = [];
         $service = $this->createStub(DepartmentService::class);
@@ -115,13 +137,13 @@ final class SeedDepartmentsCommandTest extends TestCase
         $tester = new CommandTester($this->command(service: $service));
 
         self::assertSame(Command::SUCCESS, $tester->execute([]));
-        self::assertSame(['Protection', 'Ecology', 'Community'], $created);
+        self::assertSame(self::roster(), $created);
 
         $display = $tester->getDisplay();
-        foreach (['Protection', 'Ecology', 'Community'] as $name) {
+        foreach (self::roster() as $name) {
             self::assertStringContainsString($name, $display);
         }
-        self::assertStringContainsString('3 department(s) created', $display);
+        self::assertStringContainsString('8 department(s) created', $display);
     }
 
     public function testASecondRunCreatesNothing(): void
@@ -129,11 +151,7 @@ final class SeedDepartmentsCommandTest extends TestCase
         $service = $this->createMock(DepartmentService::class);
         $service->expects(self::never())->method('create');
 
-        $existing = [
-            'Protection' => $this->department('Protection'),
-            'Ecology' => $this->department('Ecology'),
-            'Community' => $this->department('Community'),
-        ];
+        $existing = $this->allExisting();
 
         $tester = new CommandTester($this->command(existing: $existing, service: $service));
 
@@ -160,23 +178,19 @@ final class SeedDepartmentsCommandTest extends TestCase
         $tester = new CommandTester($this->command(catalogue: ['patrols' => $patrols], service: $service));
 
         self::assertSame(Command::SUCCESS, $tester->execute([]));
-        self::assertSame(['Protection/patrols', 'Ecology/patrols'], $attached);
+        self::assertSame(['Protection Service/patrols', 'Ecology/patrols'], $attached);
     }
 
     public function testAnAlreadyAttachedModuleIsNotAttachedTwice(): void
     {
         $patrols = new Module('patrols', 'Patrols');
-        $protection = $this->department('Protection')->addModule($patrols);
-        $ecology = $this->department('Ecology')->addModule($patrols);
 
         $service = $this->createMock(DepartmentService::class);
         $service->expects(self::never())->method('attachModule');
 
-        $existing = [
-            'Protection' => $protection,
-            'Ecology' => $ecology,
-            'Community' => $this->department('Community'),
-        ];
+        $existing = $this->allExisting();
+        $existing['Protection Service']->addModule($patrols);
+        $existing['Ecology']->addModule($patrols);
 
         $tester = new CommandTester($this->command(existing: $existing, catalogue: ['patrols' => $patrols], service: $service));
 
@@ -212,7 +226,7 @@ final class SeedDepartmentsCommandTest extends TestCase
         ));
 
         self::assertSame(Command::SUCCESS, $tester->execute([]));
-        self::assertSame('Protection', $ranger->getDepartment()?->getName());
+        self::assertSame('Protection Service', $ranger->getDepartment()?->getName());
         self::assertSame('Ecology', $analyst->getDepartment()?->getName());
     }
 

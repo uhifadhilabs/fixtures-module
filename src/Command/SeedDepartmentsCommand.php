@@ -26,10 +26,11 @@ use Uhifadhi\Repository\PositionRepository;
 use Uhifadhi\Service\DepartmentService;
 
 /**
- * Seeds the three GENERIC demo departments — Protection, Ecology, Community —
- * so a fresh host shows the department lens working. The names are ordinary
- * conservation vocabulary and never a real deployment's org chart; a host that
- * wants its own renames or adds them in the UI.
+ * Seeds the eight GENERIC demo departments — the same sample org the design
+ * app renders (uhifadhi-web departments.widgets.js) — so a fresh host shows
+ * the department lens working and matches the spec's boards. The names are
+ * ordinary conservation vocabulary and never a real deployment's org chart;
+ * a host that wants its own renames or adds them in the UI.
  *
  * Idempotent and non-destructive: nothing is ever purged, renamed or detached.
  * Modules are attached by slug only when the catalogue already holds them (a
@@ -51,9 +52,14 @@ final class SeedDepartmentsCommand extends Command
      * @var array<string, list<string>>
      */
     private const array DEPARTMENTS = [
-        'Protection' => ['patrols'],
+        'Protection Service' => ['patrols'],
         'Ecology' => ['patrols'],
-        'Community' => [],
+        'Community Development' => [],
+        'Engineering' => [],
+        'Human Resource' => [],
+        'Planning' => [],
+        'Tourism' => [],
+        'ICT' => [],
     ];
 
     /**
@@ -62,7 +68,7 @@ final class SeedDepartmentsCommand extends Command
      * @var array<string, string>
      */
     private const array POSITIONS = [
-        'Ranger' => 'Protection',
+        'Ranger' => 'Protection Service',
         'Analyst' => 'Ecology',
     ];
 
