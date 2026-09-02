@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\Command;
+namespace UhifadhiLabs\Fixtures\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -36,12 +36,12 @@ use Uhifadhi\Service\DepartmentService;
  * Modules are attached by slug only when the catalogue already holds them (a
  * missing slug is a note, never an error), and the demo positions are filed
  * only while nobody filed them — a position an admin already placed keeps that
- * placement, because the seeder never overwrites a human decision. Patrols is
+ * placement, because the fixtures seed never overwrites a human decision. Patrols is
  * deliberately attached to BOTH Protection and Ecology: a module belongs to
  * every department that works in it, and the demo should show that.
  */
 #[AsCommand(
-    name: 'seeder:departments',
+    name: 'fixtures:departments',
     description: 'Seed the generic demo departments, their modules and the demo positions (idempotent).',
 )]
 final class SeedDepartmentsCommand extends Command
@@ -63,7 +63,7 @@ final class SeedDepartmentsCommand extends Command
     ];
 
     /**
-     * Which demo position belongs under which department (seeder:accounts creates them).
+     * Which demo position belongs under which department (fixtures:accounts creates them).
      *
      * @var array<string, string>
      */
@@ -129,7 +129,7 @@ final class SeedDepartmentsCommand extends Command
         foreach (self::POSITIONS as $positionName => $departmentName) {
             $position = $this->positions->findOneBy(['name' => $positionName]);
             if (null === $position) {
-                $notes[] = \sprintf('Position "%s" does not exist yet — run seeder:accounts first, then re-run this command.', $positionName);
+                $notes[] = \sprintf('Position "%s" does not exist yet — run fixtures:accounts first, then re-run this command.', $positionName);
                 $positionRows[] = [$positionName, '—', 'missing'];
                 continue;
             }
@@ -147,7 +147,7 @@ final class SeedDepartmentsCommand extends Command
                 continue;
             }
 
-            $notes[] = \sprintf('Position "%s" is already filed under "%s" — left as is; the seeder never overrides an admin\'s filing.', $positionName, $current->getName() ?? '?');
+            $notes[] = \sprintf('Position "%s" is already filed under "%s" — left as is; the fixtures seed never overrides an admin\'s filing.', $positionName, $current->getName() ?? '?');
             $positionRows[] = [$positionName, $current->getName() ?? '?', 'left as is'];
         }
 

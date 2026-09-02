@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -15,7 +15,7 @@ namespace Uhifadhi\Entity;
 
 /**
  * Dev-only stub of the host's AreaOfInterest entity — just the surface the
- * seeder commands touch. The real one is used inside uhifadhi.
+ * fixtures commands touch. The real one is used inside uhifadhi.
  */
 class AreaOfInterest
 {

@@ -15,7 +15,7 @@ return (new PhpCsFixer\Config())
         // phpstan reads them; the default rule would downgrade them to `/* … */`.
         'phpdoc_to_comment' => ['ignored_tags' => ['var']],
         'header_comment' => ['header' => <<<'EOF'
-This file is part of the UhifadhiLabs Seeder Module.
+This file is part of the UhifadhiLabs Fixtures Module.
 
 (c) Ezekiel Mjema <https://github.com/eemjema>
 

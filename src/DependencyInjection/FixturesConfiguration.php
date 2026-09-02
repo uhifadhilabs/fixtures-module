@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\DependencyInjection;
+namespace UhifadhiLabs\Fixtures\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 
 /**
  * The bundle's semantic configuration — how a host points the demo seed at its
- * own credentials and domain in config/packages/seeder.yaml:
+ * own credentials and domain in config/packages/fixtures.yaml:
  *
- *   seeder:
+ *   fixtures:
  *     demo_password: '%env(DEMO_PASSWORD)%'
  *     super_admin_password: '%env(DEMO_SUPER_ADMIN_PASSWORD)%'
  *     email_domain: 'uhifadhi.test'
@@ -28,12 +28,12 @@ use Symfony\Component\Config\Definition\Builder\NodeDefinition;
  * Static so the tree is testable with a plain Processor and shared verbatim by
  * the bundle's configure() hook.
  */
-final class SeederConfiguration
+final class FixturesConfiguration
 {
     public static function define(NodeDefinition|ArrayNodeDefinition $root): void
     {
         if (!$root instanceof ArrayNodeDefinition) {
-            throw new \LogicException('The seeder root node must be an array node.');
+            throw new \LogicException('The fixtures root node must be an array node.');
         }
 
         $root

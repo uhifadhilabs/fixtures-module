@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\Command;
+namespace UhifadhiLabs\Fixtures\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -32,11 +32,11 @@ use Uhifadhi\Repository\UserRepository;
  * positions with a single shared password from DEMO_PASSWORD, hashed here.
  * Idempotent and non-destructive: it never purges, so it is safe against a
  * database holding real data. Demo emails are built from the configured
- * seeder.email_domain (uhifadhi.test by default); provision real accounts with
+ * fixtures.email_domain (uhifadhi.test by default); provision real accounts with
  * the host's app:user:create.
  */
 #[AsCommand(
-    name: 'seeder:accounts',
+    name: 'fixtures:accounts',
     description: 'Seed the demo accounts + positions (idempotent; password from DEMO_PASSWORD).',
 )]
 final class SeedAccountsCommand extends Command

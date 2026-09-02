@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -17,7 +17,7 @@ use Uhifadhi\Entity\Department;
 use Uhifadhi\Entity\Module;
 
 /**
- * Dev-only stub of the host's DepartmentService — the seeder commands are unit
+ * Dev-only stub of the host's DepartmentService — the fixtures commands are unit
  * tested against mocks of this surface.
  */
 class DepartmentService

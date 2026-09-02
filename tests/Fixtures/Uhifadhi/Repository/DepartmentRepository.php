@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -16,7 +16,7 @@ namespace Uhifadhi\Repository;
 use Uhifadhi\Entity\Department;
 
 /**
- * Dev-only stub of the host's DepartmentRepository — the seeder commands are
+ * Dev-only stub of the host's DepartmentRepository — the fixtures commands are
  * unit tested against mocks of this surface.
  */
 class DepartmentRepository

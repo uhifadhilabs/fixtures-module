@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\Tests\Unit;
+namespace UhifadhiLabs\Fixtures\Tests\Unit;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
@@ -24,10 +24,10 @@ use Uhifadhi\Repository\DepartmentRepository;
 use Uhifadhi\Repository\ModuleRepository;
 use Uhifadhi\Repository\PositionRepository;
 use Uhifadhi\Service\DepartmentService;
-use UhifadhiLabs\Seeder\Command\SeedDepartmentsCommand;
+use UhifadhiLabs\Fixtures\Command\SeedDepartmentsCommand;
 
 /**
- * seeder:departments must create the three generic demo departments when none
+ * fixtures:departments must create the three generic demo departments when none
  * exist, be idempotent, attach catalogue modules by slug (skipping the ones the
  * host has not installed), and file only the demo positions nobody filed yet —
  * an admin's own filing is never overwritten.
@@ -248,6 +248,6 @@ final class SeedDepartmentsCommandTest extends TestCase
 
         self::assertSame(Command::SUCCESS, $tester->execute([]));
         self::assertStringContainsString('Ranger', $tester->getDisplay());
-        self::assertStringContainsString('seeder:accounts', $tester->getDisplay());
+        self::assertStringContainsString('fixtures:accounts', $tester->getDisplay());
     }
 }

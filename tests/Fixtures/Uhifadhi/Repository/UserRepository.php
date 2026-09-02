@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -16,7 +16,7 @@ namespace Uhifadhi\Repository;
 use Uhifadhi\Entity\User;
 
 /**
- * Dev-only stub of the host's UserRepository — the seeder commands are unit
+ * Dev-only stub of the host's UserRepository — the fixtures commands are unit
  * tested against mocks of this surface.
  */
 class UserRepository

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\Tests\Unit;
+namespace UhifadhiLabs\Fixtures\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
@@ -20,10 +20,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
-use UhifadhiLabs\Seeder\Command\SeedAllCommand;
+use UhifadhiLabs\Fixtures\Command\SeedAllCommand;
 
 /**
- * seeder:all orchestrates accounts → area (forwarding --area-* options) and
+ * fixtures:all orchestrates accounts → area (forwarding --area-* options) and
  * runs the host's catalogue step only when the host provides it — the module
  * must degrade gracefully outside a full uhifadhi host.
  */
@@ -58,11 +58,11 @@ final class SeedAllCommandTest extends TestCase
             }
         };
 
-        $application->addCommand($record('seeder:accounts', function (): void {
-            $this->ran[] = 'seeder:accounts';
+        $application->addCommand($record('fixtures:accounts', function (): void {
+            $this->ran[] = 'fixtures:accounts';
         }));
-        $application->addCommand($record('seeder:area', function (InputInterface $input): void {
-            $this->ran[] = 'seeder:area';
+        $application->addCommand($record('fixtures:area', function (InputInterface $input): void {
+            $this->ran[] = 'fixtures:area';
             $this->areaInput = ['uuid' => $input->getOption('uuid'), 'file' => $input->getOption('file')];
         }));
         if ($withCatalogue) {
@@ -71,8 +71,8 @@ final class SeedAllCommandTest extends TestCase
             }));
         }
         if ($withDepartments) {
-            $application->addCommand($record('seeder:departments', function (): void {
-                $this->ran[] = 'seeder:departments';
+            $application->addCommand($record('fixtures:departments', function (): void {
+                $this->ran[] = 'fixtures:departments';
             }));
         }
         $application->addCommand(new SeedAllCommand());
@@ -83,22 +83,22 @@ final class SeedAllCommandTest extends TestCase
     public function testItRunsAllStepsInOrderAndForwardsAreaOptions(): void
     {
         $application = $this->application(withCatalogue: true);
-        $tester = new CommandTester($application->find('seeder:all'));
+        $tester = new CommandTester($application->find('fixtures:all'));
 
         $exit = $tester->execute(['--area-uuid' => 'abc', '--area-file' => '/tmp/x.geojson']);
 
         self::assertSame(Command::SUCCESS, $exit);
         // Departments run last: they attach modules by slug, so the catalogue must exist first.
-        self::assertSame(['seeder:accounts', 'seeder:area', 'app:seed:catalogue', 'seeder:departments'], $this->ran);
+        self::assertSame(['fixtures:accounts', 'fixtures:area', 'app:seed:catalogue', 'fixtures:departments'], $this->ran);
         self::assertSame(['uuid' => 'abc', 'file' => '/tmp/x.geojson'], $this->areaInput);
     }
 
     public function testTheCatalogueStepIsSkippedOutsideAHost(): void
     {
         $application = $this->application(withCatalogue: false, withDepartments: false);
-        $tester = new CommandTester($application->find('seeder:all'));
+        $tester = new CommandTester($application->find('fixtures:all'));
 
         self::assertSame(Command::SUCCESS, $tester->execute([]));
-        self::assertSame(['seeder:accounts', 'seeder:area'], $this->ran);
+        self::assertSame(['fixtures:accounts', 'fixtures:area'], $this->ran);
     }
 }

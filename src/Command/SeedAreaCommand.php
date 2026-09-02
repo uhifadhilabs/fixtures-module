@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\Command;
+namespace UhifadhiLabs\Fixtures\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -30,7 +30,7 @@ use Uhifadhi\Service\AreaSeeder;
  * explicit --uuid/--name/--file.
  */
 #[AsCommand(
-    name: 'seeder:area',
+    name: 'fixtures:area',
     description: 'Seed an area with a fixed uuid — the imaginary demo area by default, or an explicit GeoJSON boundary.',
 )]
 final class SeedAreaCommand extends Command
@@ -96,7 +96,7 @@ final class SeedAreaCommand extends Command
      */
     private function writeBuiltInBoundary(): string
     {
-        $file = tempnam(sys_get_temp_dir(), 'seeder-area').'.geojson';
+        $file = tempnam(sys_get_temp_dir(), 'fixtures-area').'.geojson';
         file_put_contents($file, (string) json_encode([
             'type' => 'Feature',
             'properties' => ['name' => self::DEMO_NAME],

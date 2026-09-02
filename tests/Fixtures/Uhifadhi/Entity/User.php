@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Uhifadhi\Enum\TeamRoleEnum;
 
 /**
- * Dev-only stub of the host's User entity — just the surface the seeder
+ * Dev-only stub of the host's User entity — just the surface the fixtures
  * commands touch. The real one is used inside uhifadhi.
  */
 class User implements PasswordAuthenticatedUserInterface

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\Tests\Unit;
+namespace UhifadhiLabs\Fixtures\Tests\Unit;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
@@ -21,10 +21,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Uhifadhi\Entity\User;
 use Uhifadhi\Repository\PositionRepository;
 use Uhifadhi\Repository\UserRepository;
-use UhifadhiLabs\Seeder\Command\SeedAccountsCommand;
+use UhifadhiLabs\Fixtures\Command\SeedAccountsCommand;
 
 /**
- * seeder:accounts must refuse placeholder passwords, create the five demo
+ * fixtures:accounts must refuse placeholder passwords, create the five demo
  * accounts when none exist, and be idempotent (create nothing when the emails
  * already resolve).
  */

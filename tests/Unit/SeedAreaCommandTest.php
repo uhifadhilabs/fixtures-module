@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\Tests\Unit;
+namespace UhifadhiLabs\Fixtures\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Uhifadhi\Entity\AreaOfInterest;
 use Uhifadhi\Service\AreaSeeder;
-use UhifadhiLabs\Seeder\Command\SeedAreaCommand;
+use UhifadhiLabs\Fixtures\Command\SeedAreaCommand;
 
 /**
- * seeder:area seeds the built-in IMAGINARY Antarctic demo area by default (no
+ * fixtures:area seeds the built-in IMAGINARY Antarctic demo area by default (no
  * real-deployment references in the module), forwards explicit options
- * untouched, and surfaces seeder failures as command failures.
+ * untouched, and surfaces seeding failures as command failures.
  */
 final class SeedAreaCommandTest extends TestCase
 {

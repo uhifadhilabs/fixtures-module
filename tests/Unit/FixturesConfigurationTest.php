@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\Tests\Unit;
+namespace UhifadhiLabs\Fixtures\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
-use UhifadhiLabs\Seeder\DependencyInjection\SeederConfiguration;
+use UhifadhiLabs\Fixtures\DependencyInjection\FixturesConfiguration;
 
 /**
- * The seeder config tree: env-backed password defaults, a neutral demo email
+ * The fixtures config tree: env-backed password defaults, a neutral demo email
  * domain, and no empty domain (it would produce invalid demo emails).
  */
-final class SeederConfigurationTest extends TestCase
+final class FixturesConfigurationTest extends TestCase
 {
     /**
      * @param list<array<string, mixed>> $configs
@@ -32,8 +32,8 @@ final class SeederConfigurationTest extends TestCase
      */
     private function process(array $configs): array
     {
-        $tree = new TreeBuilder('seeder');
-        SeederConfiguration::define($tree->getRootNode());
+        $tree = new TreeBuilder('fixtures');
+        FixturesConfiguration::define($tree->getRootNode());
 
         return new Processor()->process($tree->buildTree(), $configs);
     }

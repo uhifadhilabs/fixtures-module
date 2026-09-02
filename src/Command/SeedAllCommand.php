@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the UhifadhiLabs Seeder Module.
+ * This file is part of the UhifadhiLabs Fixtures Module.
  *
  * (c) Ezekiel Mjema <https://github.com/eemjema>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Seeder\Command;
+namespace UhifadhiLabs\Fixtures\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -30,7 +30,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * its own <module>:seed:* commands — run those after this.
  */
 #[AsCommand(
-    name: 'seeder:all',
+    name: 'fixtures:all',
     description: 'Seed the baseline (accounts, area, catalogue, departments). Modules seed themselves via <module>:seed:*.',
 )]
 final class SeedAllCommand extends Command
@@ -38,9 +38,9 @@ final class SeedAllCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addOption('area-uuid', null, InputOption::VALUE_REQUIRED, 'Fixed uuid passed to seeder:area')
-            ->addOption('area-name', null, InputOption::VALUE_REQUIRED, 'Area name passed to seeder:area')
-            ->addOption('area-file', null, InputOption::VALUE_REQUIRED, 'GeoJSON boundary file passed to seeder:area');
+            ->addOption('area-uuid', null, InputOption::VALUE_REQUIRED, 'Fixed uuid passed to fixtures:area')
+            ->addOption('area-name', null, InputOption::VALUE_REQUIRED, 'Area name passed to fixtures:area')
+            ->addOption('area-file', null, InputOption::VALUE_REQUIRED, 'GeoJSON boundary file passed to fixtures:area');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -60,8 +60,8 @@ final class SeedAllCommand extends Command
         }
 
         $steps = [
-            'seeder:accounts' => [],
-            'seeder:area' => $areaOptions,
+            'fixtures:accounts' => [],
+            'fixtures:area' => $areaOptions,
         ];
         // The catalogue command belongs to the host; skip gracefully when the
         // module runs outside a full uhifadhi host (e.g. its own test kernel).
@@ -72,8 +72,8 @@ final class SeedAllCommand extends Command
         // must already hold them — run before it and every attachment would be
         // skipped as "not in the catalogue". Skipped the same way outside a host,
         // where the department entity and services do not exist.
-        if ($application->has('seeder:departments')) {
-            $steps['seeder:departments'] = [];
+        if ($application->has('fixtures:departments')) {
+            $steps['fixtures:departments'] = [];
         }
 
         foreach ($steps as $name => $options) {
