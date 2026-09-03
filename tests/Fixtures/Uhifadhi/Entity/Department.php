@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Uhifadhi\Entity;
 
-use Uhifadhi\Trunk\Entity\Module;
+use Uhifadhi\Seam\Entity\Module;
 
 /**
  * Dev-only stub of the host's Department entity — just the surface the fixtures

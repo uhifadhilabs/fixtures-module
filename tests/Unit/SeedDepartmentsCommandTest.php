@@ -22,9 +22,9 @@ use Uhifadhi\Entity\Position;
 use Uhifadhi\Fixtures\Command\SeedDepartmentsCommand;
 use Uhifadhi\Repository\DepartmentRepository;
 use Uhifadhi\Repository\PositionRepository;
+use Uhifadhi\Seam\Entity\Module;
+use Uhifadhi\Seam\Repository\ModuleRepository;
 use Uhifadhi\Service\DepartmentService;
-use Uhifadhi\Trunk\Entity\Module;
-use Uhifadhi\Trunk\Repository\ModuleRepository;
 
 /**
  * fixtures:departments must create the three generic demo departments when none

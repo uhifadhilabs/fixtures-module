@@ -69,7 +69,7 @@ final class UhifadhiFixturesBundle extends AbstractBundle
                 service('doctrine.orm.entity_manager'),
                 service('Uhifadhi\Repository\DepartmentRepository'),
                 service('Uhifadhi\Service\DepartmentService'),
-                service('Uhifadhi\Trunk\Repository\ModuleRepository'),
+                service('Uhifadhi\Seam\Repository\ModuleRepository'),
                 service('Uhifadhi\Repository\PositionRepository'),
             ])
             ->tag('console.command');
