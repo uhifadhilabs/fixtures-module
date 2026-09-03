@@ -27,10 +27,10 @@ use Uhifadhi\Service\DepartmentService;
 
 /**
  * Seeds the eight GENERIC demo departments — the same sample org the design
- * app renders (uhifadhi-web departments.widgets.js) — so a fresh host shows
+ * app renders (departments.widgets.js) — so a fresh installation shows
  * the department lens working and matches the spec's boards. The names are
  * ordinary conservation vocabulary and never a real deployment's org chart;
- * a host that wants its own renames or adds them in the UI.
+ * an installation that wants its own renames or adds them in the UI.
  *
  * Idempotent and non-destructive: nothing is ever purged, renamed or detached.
  * Modules are attached by slug only when the catalogue already holds them (a

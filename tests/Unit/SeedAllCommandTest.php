@@ -25,7 +25,7 @@ use Uhifadhi\Fixtures\Command\SeedAllCommand;
 /**
  * fixtures:all orchestrates accounts → area (forwarding --area-* options) and
  * runs the host's catalogue step only when the host provides it — the module
- * must degrade gracefully outside a full uhifadhi host.
+ * must degrade gracefully outside a full uhifadhi installation.
  */
 final class SeedAllCommandTest extends TestCase
 {

@@ -26,7 +26,8 @@ use Uhifadhi\Fixtures\DependencyInjection\FixturesConfiguration;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 /**
- * Fixtures — dev/demo data for uhifadhi hosts, kept OUT of the host so the app
+ * Fixtures — dev/demo data for uhifadhi installations, kept OUT of the host
+ * application so the app
  * carries no seed content: demo accounts + positions, an imaginary protected
  * area (nobody's land — Antarctica) with a fixed uuid, and the one-shot
  * baseline orchestrator. Deployment-specific seeding (real boundaries, real
@@ -34,7 +35,7 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
  *
  * Explicit wiring, no autowire/autoconfigure (reusable-bundle rule). Host
  * services are referenced by their class-name service ids — the bundle only
- * makes sense installed in a uhifadhi host, which provides them.
+ * makes sense installed in a uhifadhi installation, which provides them.
  */
 final class UhifadhiFixturesBundle extends AbstractBundle
 {

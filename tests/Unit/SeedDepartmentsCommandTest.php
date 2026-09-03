@@ -102,7 +102,7 @@ final class SeedDepartmentsCommandTest extends TestCase
 
     /**
      * The full demo roster, in creation order — the design app's sample org
-     * (departments.widgets.js), which the seeded host must mirror.
+     * (departments.widgets.js), which the seeded installation must mirror.
      *
      * @return list<string>
      */

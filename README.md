@@ -1,6 +1,6 @@
 # uhifadhi/fixtures-module
 
-Dev and demo data seeding for uhifadhi hosts: the demo accounts and positions,
+Dev and demo data seeding for uhifadhi installations: the demo accounts and positions,
 a fixed-uuid area from a GeoJSON boundary, the generic demo departments, and
 the one-shot orchestrator that lays the baseline down in the right order. A
 [uhifadhi](https://github.com/uhifadhilabs) module bundle.
@@ -21,7 +21,7 @@ the one-shot orchestrator that lays the baseline down in the right order. A
 
 ## Charter
 
-**A baseline, not a dataset.** This module seeds only what every host needs
+**A baseline, not a dataset.** This module seeds only what every installation needs
 before anything else can be seen: people to log in as, one area to hang data
 on, a module catalogue and the departments that read it. Domain data belongs
 to the module that owns it — each installed module ships its own
@@ -34,7 +34,7 @@ an admin placed, a department they renamed — is never overwritten.
 **Never a real deployment.** The built-in demo area is an imaginary protected
 area on the Antarctic coast, and the eight demo departments are ordinary
 conservation vocabulary. No real organisation's boundary, org chart or domain
-appears here. A host that wants its own passes them in explicitly.
+appears here. An installation that wants its own passes them in explicitly.
 
 ## Commands
 

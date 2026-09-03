@@ -64,13 +64,14 @@ final class SeedAllCommand extends Command
             'fixtures:area' => $areaOptions,
         ];
         // The catalogue command belongs to the host; skip gracefully when the
-        // module runs outside a full uhifadhi host (e.g. its own test kernel).
+        // module runs outside a full uhifadhi installation (e.g. its own test kernel).
         if ($application->has('app:seed:catalogue')) {
             $steps['app:seed:catalogue'] = [];
         }
         // Departments come LAST: they attach modules by slug, so the catalogue
         // must already hold them — run before it and every attachment would be
-        // skipped as "not in the catalogue". Skipped the same way outside a host,
+        // skipped as "not in the catalogue". Skipped the same way outside an
+        // installation,
         // where the department entity and services do not exist.
         if ($application->has('fixtures:departments')) {
             $steps['fixtures:departments'] = [];
