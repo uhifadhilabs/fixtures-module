@@ -1,6 +1,6 @@
 {
     "name": "uhifadhi/fixtures-module",
-    "description": "Fixtures: dev/demo data seeding for uhifadhi hosts — demo accounts + positions, fixed-uuid area from a GeoJSON boundary, and the one-shot baseline orchestrator.",
+    "description": "Fixtures: dev/demo data seeding for uhifadhi hosts \u2014 demo accounts + positions, fixed-uuid area from a GeoJSON boundary, and the one-shot baseline orchestrator.",
     "type": "symfony-bundle",
     "keywords": [
         "seeding",
@@ -17,14 +17,16 @@
         }
     ],
     "require": {
-        "php": ">=8.4",
         "doctrine/orm": "^3.5",
+        "php": ">=8.4",
         "symfony/config": "^7.3 || ^8.0",
         "symfony/console": "^7.3 || ^8.0",
         "symfony/dependency-injection": "^7.3 || ^8.0",
         "symfony/framework-bundle": "^7.3 || ^8.0",
         "symfony/http-kernel": "^7.3 || ^8.0",
-        "symfony/password-hasher": "^7.3 || ^8.0"
+        "symfony/password-hasher": "^7.3 || ^8.0",
+        "uhifadhi/module-contracts": "dev-main",
+        "uhifadhi/trunk-module": "dev-main"
     },
     "autoload": {
         "psr-4": {
@@ -63,5 +65,17 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "name": "module-contracts",
+            "type": "vcs",
+            "url": "https://github.com/uhifadhilabs/module-contracts"
+        },
+        {
+            "name": "trunk-module",
+            "type": "vcs",
+            "url": "https://github.com/uhifadhilabs/trunk-module"
+        }
+    ]
 }

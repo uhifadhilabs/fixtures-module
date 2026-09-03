@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Uhifadhi\Entity;
 
+use UhifadhiLabs\Trunk\Entity\Module;
+
 /**
  * Dev-only stub of the host's Department entity — just the surface the fixtures
  * commands touch. The real one is used inside uhifadhi.

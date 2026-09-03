@@ -21,9 +21,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Uhifadhi\Entity\Department;
 use Uhifadhi\Repository\DepartmentRepository;
-use Uhifadhi\Repository\ModuleRepository;
 use Uhifadhi\Repository\PositionRepository;
 use Uhifadhi\Service\DepartmentService;
+use UhifadhiLabs\Trunk\Repository\ModuleRepository;
 
 /**
  * Seeds the eight GENERIC demo departments — the same sample org the design

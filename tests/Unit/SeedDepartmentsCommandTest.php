@@ -18,13 +18,13 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Uhifadhi\Entity\Department;
-use Uhifadhi\Entity\Module;
 use Uhifadhi\Entity\Position;
 use Uhifadhi\Repository\DepartmentRepository;
-use Uhifadhi\Repository\ModuleRepository;
 use Uhifadhi\Repository\PositionRepository;
 use Uhifadhi\Service\DepartmentService;
 use UhifadhiLabs\Fixtures\Command\SeedDepartmentsCommand;
+use UhifadhiLabs\Trunk\Entity\Module;
+use UhifadhiLabs\Trunk\Repository\ModuleRepository;
 
 /**
  * fixtures:departments must create the three generic demo departments when none
@@ -161,7 +161,7 @@ final class SeedDepartmentsCommandTest extends TestCase
 
     public function testItAttachesTheCatalogueModuleToBothProtectionAndEcology(): void
     {
-        $patrols = new Module('patrols', 'Patrols');
+        $patrols = new Module()->setSlug('patrols')->setName('Patrols');
 
         $attached = [];
         $service = $this->createStub(DepartmentService::class);
@@ -183,7 +183,7 @@ final class SeedDepartmentsCommandTest extends TestCase
 
     public function testAnAlreadyAttachedModuleIsNotAttachedTwice(): void
     {
-        $patrols = new Module('patrols', 'Patrols');
+        $patrols = new Module()->setSlug('patrols')->setName('Patrols');
 
         $service = $this->createMock(DepartmentService::class);
         $service->expects(self::never())->method('attachModule');
