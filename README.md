@@ -67,7 +67,7 @@ $ composer require --dev uhifadhi/fixtures-module
 Register the bundle for the dev and test environments in `config/bundles.php`:
 
 ```php
-UhifadhiLabs\Fixtures\UhifadhiLabsFixturesBundle::class => ['dev' => true, 'test' => true],
+Uhifadhi\Fixtures\UhifadhiFixturesBundle::class => ['dev' => true, 'test' => true],
 ```
 
 ## Configuration

@@ -30,13 +30,16 @@
     },
     "autoload": {
         "psr-4": {
-            "UhifadhiLabs\\Fixtures\\": "src/"
+            "Uhifadhi\\Fixtures\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "UhifadhiLabs\\Fixtures\\Tests\\": "tests/",
-            "Uhifadhi\\": "tests/Fixtures/Uhifadhi/"
+            "Uhifadhi\\Fixtures\\Tests\\": "tests/",
+            "Uhifadhi\\Entity\\": "tests/Fixtures/Uhifadhi/Entity/",
+            "Uhifadhi\\Enum\\": "tests/Fixtures/Uhifadhi/Enum/",
+            "Uhifadhi\\Repository\\": "tests/Fixtures/Uhifadhi/Repository/",
+            "Uhifadhi\\Service\\": "tests/Fixtures/Uhifadhi/Service/"
         }
     },
     "require-dev": {

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Fixtures\Tests\Unit;
+namespace Uhifadhi\Fixtures\Tests\Unit;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
@@ -19,12 +19,12 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Uhifadhi\Entity\Department;
 use Uhifadhi\Entity\Position;
+use Uhifadhi\Fixtures\Command\SeedDepartmentsCommand;
 use Uhifadhi\Repository\DepartmentRepository;
 use Uhifadhi\Repository\PositionRepository;
 use Uhifadhi\Service\DepartmentService;
-use UhifadhiLabs\Fixtures\Command\SeedDepartmentsCommand;
-use UhifadhiLabs\Trunk\Entity\Module;
-use UhifadhiLabs\Trunk\Repository\ModuleRepository;
+use Uhifadhi\Trunk\Entity\Module;
+use Uhifadhi\Trunk\Repository\ModuleRepository;
 
 /**
  * fixtures:departments must create the three generic demo departments when none

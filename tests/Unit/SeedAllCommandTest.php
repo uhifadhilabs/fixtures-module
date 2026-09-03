@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Fixtures\Tests\Unit;
+namespace Uhifadhi\Fixtures\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
-use UhifadhiLabs\Fixtures\Command\SeedAllCommand;
+use Uhifadhi\Fixtures\Command\SeedAllCommand;
 
 /**
  * fixtures:all orchestrates accounts → area (forwarding --area-* options) and

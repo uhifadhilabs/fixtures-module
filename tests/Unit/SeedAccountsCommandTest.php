@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Fixtures\Tests\Unit;
+namespace Uhifadhi\Fixtures\Tests\Unit;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
@@ -19,9 +19,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Uhifadhi\Entity\User;
+use Uhifadhi\Fixtures\Command\SeedAccountsCommand;
 use Uhifadhi\Repository\PositionRepository;
 use Uhifadhi\Repository\UserRepository;
-use UhifadhiLabs\Fixtures\Command\SeedAccountsCommand;
 
 /**
  * fixtures:accounts must refuse placeholder passwords, create the five demo

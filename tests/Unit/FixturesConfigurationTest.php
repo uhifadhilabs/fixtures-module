@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Fixtures\Tests\Unit;
+namespace Uhifadhi\Fixtures\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
-use UhifadhiLabs\Fixtures\DependencyInjection\FixturesConfiguration;
+use Uhifadhi\Fixtures\DependencyInjection\FixturesConfiguration;
 
 /**
  * The fixtures config tree: env-backed password defaults, a neutral demo email

@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Fixtures\Tests\Unit;
+namespace Uhifadhi\Fixtures\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Uhifadhi\Entity\AreaOfInterest;
+use Uhifadhi\Fixtures\Command\SeedAreaCommand;
 use Uhifadhi\Service\AreaSeeder;
-use UhifadhiLabs\Fixtures\Command\SeedAreaCommand;
 
 /**
  * fixtures:area seeds the built-in IMAGINARY Antarctic demo area by default (no

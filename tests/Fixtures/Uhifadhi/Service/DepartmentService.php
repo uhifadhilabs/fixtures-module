@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Uhifadhi\Service;
 
 use Uhifadhi\Entity\Department;
-use UhifadhiLabs\Trunk\Entity\Module;
+use Uhifadhi\Trunk\Entity\Module;
 
 /**
  * Dev-only stub of the host's DepartmentService — the fixtures commands are unit

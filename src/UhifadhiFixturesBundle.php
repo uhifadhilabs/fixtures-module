@@ -11,17 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Fixtures;
+namespace Uhifadhi\Fixtures;
 
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
-use UhifadhiLabs\Fixtures\Command\SeedAccountsCommand;
-use UhifadhiLabs\Fixtures\Command\SeedAllCommand;
-use UhifadhiLabs\Fixtures\Command\SeedAreaCommand;
-use UhifadhiLabs\Fixtures\Command\SeedDepartmentsCommand;
-use UhifadhiLabs\Fixtures\DependencyInjection\FixturesConfiguration;
+use Uhifadhi\Fixtures\Command\SeedAccountsCommand;
+use Uhifadhi\Fixtures\Command\SeedAllCommand;
+use Uhifadhi\Fixtures\Command\SeedAreaCommand;
+use Uhifadhi\Fixtures\Command\SeedDepartmentsCommand;
+use Uhifadhi\Fixtures\DependencyInjection\FixturesConfiguration;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
@@ -36,7 +36,7 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
  * services are referenced by their class-name service ids — the bundle only
  * makes sense installed in a uhifadhi host, which provides them.
  */
-final class UhifadhiLabsFixturesBundle extends AbstractBundle
+final class UhifadhiFixturesBundle extends AbstractBundle
 {
     protected string $extensionAlias = 'fixtures';
 
@@ -69,7 +69,7 @@ final class UhifadhiLabsFixturesBundle extends AbstractBundle
                 service('doctrine.orm.entity_manager'),
                 service('Uhifadhi\Repository\DepartmentRepository'),
                 service('Uhifadhi\Service\DepartmentService'),
-                service('UhifadhiLabs\Trunk\Repository\ModuleRepository'),
+                service('Uhifadhi\Trunk\Repository\ModuleRepository'),
                 service('Uhifadhi\Repository\PositionRepository'),
             ])
             ->tag('console.command');
